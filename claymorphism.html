@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClayMorphism</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        *, *:before, *:after{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #eaf6ff
+        }
+        .sci{
+            position: relative;
+            display: flex;
+            justify-content: center;
+        }
+        .sci li{
+            list-style: none;
+        }
+        .sci li a{
+            position: relative;
+            width: 60px;
+            height: 60px;
+            display: grid;
+            place-items: center;
+            text-decoration: none;
+            background: #fff;
+            margin: 0 8px;
+            color: #0994ff;
+            font-size: 1.5rem;
+            border-radius:15px;
+            box-shadow: 6px 6px 12px rgba(9, 148, 255, 0.1), 
+            -3px -3px 10px rgba(9, 148, 255, 0.1),
+            inset -3px -3px 7px rgba(9, 148, 255, 0.25);
+            transition: all 0.3s ease-in-out;
+        }
+        .sci li a:hover{
+            color: #ff638e;
+            transform: translateY(-10px);
+            box-shadow: 6px 16px 12px rgba(9, 148, 255, 0.15), 
+                3x 10px 10px rgba(9, 148, 255, 0.1),
+                inset -3x -3px 7px rgba(9, 148, 255, 0.25);
+        }
+    </style>
+</head>
+<body>
+    <ul class="sci">
+        <li><a href=""><i class="fa-solid fa-heart"></i></a></li>
+        <li><a href=""><i class="fa-solid fa-graduation-cap"></i></a></li>
+        <li><a href=""><i class="fa-solid fa-earth-americas"></i></a></li>
+        <li><a href=""><i class="fa-solid fa-gift"></i></a></li>
+    </ul>
+</body>
+</html>

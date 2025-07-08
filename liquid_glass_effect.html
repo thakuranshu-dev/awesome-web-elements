@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liquid Glass Effect</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body{
+            background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb') no-repeat center center/cover;
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+            display: flex; 
+            flex-direction: column;
+            justify-content: center; 
+            align-items: center;
+        }
+        .wrapper{
+            position: relative;
+            display: flex;
+            font-weight: 600;
+            overflow: hidden;
+            border-radius: 2rem;
+            cursor: grab;
+            box-shadow: 
+                0 0 6px #00000010,
+                0 0 20px #0000001a;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 2.2);
+        }
+        .effect{
+            position: absolute;
+            z-index: 0;
+            inset: 0;
+            backdrop-filter: blur(0.5px);
+            filter: url(#glass-distortion);
+            overflow: hidden;
+        }
+        .tint{
+            z-index: 1;
+            position: absolute;
+            inset: 0;
+            background: #ffffff10;
+        }
+        .shine{
+            position: absolute;
+            z-index: 2;
+            inset: 0;
+            overflow: hidden;
+            box-shadow: inset 2px 2px 1px 0 #ffffff4b,
+                        inset -1px -1px 1px 1px #ffffff40;
+        }
+        a{
+            text-decoration: none;
+        }
+        .wrapper{
+            display: flex;
+            gap: 25px;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-end;
+        }
+        .dock{
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            justify-content: center;
+            border-radius: 2rem;
+            padding: 0.6rem;
+        }
+        .dock,.dock>div{
+            border-radius: 2rem;
+        }
+        .dock:hover{
+            padding: 0.8rem;
+            border-radius: 2rem;
+        }
+        .dock:hover>div{
+            border-radius: 2rem;
+        }
+        .dock a{
+            position: relative;
+            width: 60px;
+            height: 60px;
+            display: grid;
+            place-items: center;
+            text-decoration: none;
+            margin: 0 8px;
+            color: #0994ff;
+            color: #fff;
+            color: #ff638e;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 2.2);
+        }
+        .dock a:hover{
+            color: #ff638e;
+            transform: translateY(-10px);
+            transform-origin: center;
+        }
+    </style>
+</head>
+<body>
+    <svg>
+        <filter id="glass-distortion">
+            <feTurbulence type="fractalNoise" baseFrequency="0.08" numOctaves="30" result="turbulence"/>
+            <feDisplacementMap in="SourceGraphic" in2="turbulence" scale="10" />
+        </filter>
+    </svg>
+    <div class="wrapper" id="draggable">
+        <div class="wrapper dock">
+            <div class="effect"></div>
+            <!-- <div class="tint"></div> -->
+            <div class="shine"></div>
+                <div class="dock">
+                    <a href=""><i class="fa-solid fa-heart"></i></a>
+                    <a href=""><i class="fa-solid fa-graduation-cap"></i></a>
+                    <a href=""><i class="fa-solid fa-earth-americas"></i></a>
+                    <a href=""><i class="fa-solid fa-gift"></i></a>
+                </div>
+        </div>
+    </div>
+
+   
+    <script>
+        const draggable = document.getElementById('draggable');
+        let isDragging = false;
+        let offsetX = 0;
+        let offsetY = 0;
+    
+        draggable.addEventListener('mousedown', function(e) {
+            isDragging = true;
+            // Calculate offset between mouse and top-left corner of the element
+            const rect = draggable.getBoundingClientRect();
+            offsetX = e.clientX - rect.left;
+            offsetY = e.clientY - rect.top;
+            draggable.style.position = 'absolute';
+            draggable.style.zIndex = 1000;
+        });
+    
+        document.addEventListener('mousemove', function(e) {
+            if (isDragging) {
+                draggable.style.left = (e.clientX - offsetX) + 'px';
+                draggable.style.top = (e.clientY - offsetY) + 'px';
+            }
+        });
+    
+        document.addEventListener('mouseup', function() {
+            isDragging = false;
+        });
+    </script>
+    
+</body>
+</html>
