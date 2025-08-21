@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liquid Loader</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #010b10;
+        }
+        .loader{
+            position: relative;
+            width: 300px;
+            height: 40px;
+            filter: url(#liquid-filter);
+        }
+        .loader span{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 40px;
+            height: 40px;
+            display: block;
+            border-radius: 50%;
+            box-shadow: 0 0 40px #009ad4;
+            background: radial-gradient(circle at 60% 40%, #02edff 70%, #009ad4 100%);
+            animation: liquid-drop 2.5s infinite cubic-bezier(.6,.05,.2,.95);
+            animation-delay: calc(0.25s * var(--i));
+            opacity: 0.85;
+        }
+
+        @keyframes liquid-drop {
+            0% {
+                transform: scaleY(1) scaleX(1) translateY(0);
+                left: 0;
+                filter: blur(0px);
+            }
+            10% {
+                transform: scaleY(1.2) scaleX(0.9) translateY(-8px);
+                filter: blur(1px);
+            }
+            25% {
+                left: calc(100% - 40px);
+                transform: scaleY(0.9) scaleX(1.1) translateY(8px);
+                filter: blur(2px);
+            }
+            40% {
+                transform: scaleY(1.1) scaleX(0.95) translateY(-6px);
+                filter: blur(1px);
+            }
+            50% {
+                left: calc(100% - 40px);
+                transform: scaleY(1) scaleX(1) translateY(0);
+                filter: blur(0px);
+            }
+            60% {
+                transform: scaleY(1.2) scaleX(0.9) translateY(-8px);
+                filter: blur(1px);
+            }
+            75% {
+                left: 0;
+                transform: scaleY(0.9) scaleX(1.1) translateY(8px);
+                filter: blur(2px);
+            }
+            90% {
+                transform: scaleY(1.1) scaleX(0.95) translateY(-6px);
+                filter: blur(1px);
+            }
+            100% {
+                transform: scaleY(1) scaleX(1) translateY(0);
+                left: 0;
+                filter: blur(0px);
+            }
+        }
+
+        svg{
+            width: 0;
+            height: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="loader">
+        <span style="--i:1;"></span>
+        <span style="--i:2;"></span>
+        <span style="--i:3;"></span>
+        <span style="--i:4;"></span>
+        <span style="--i:5;"></span>
+        <span style="--i:6;"></span>
+        <span style="--i:7;"></span>
+    </div>
+    <svg>
+        <filter id="liquid-filter">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="10" />
+            <feColorMatrix values="
+                1 0 0 0 0
+                0 1 0 0 0
+                0 0 1 0 0
+                0 0 0 20 -10" />
+        </filter>
+    </svg>
+</body>
+</html>
